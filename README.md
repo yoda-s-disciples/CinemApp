@@ -57,6 +57,9 @@ Diagrama de Casos de Uso
   <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Diagrama%20de%20Casos%20de%20Uso.jpeg?raw=true">
 </p>
 
+```Para descargar el Diagrama de la Aplicación Web, siga el siguiente enlace:```
+[Diagrama Cinempp](https://github.com/yoda-s-disciples/CinemApp/blob/master/diagramas/CinemApp.asta)
+
 ## Mockups
 
 ```
@@ -116,7 +119,7 @@ Información
 
 ## License
 
-**©** Carlos Andres Amorocho Amorocho, Jairo Eduardo Pulido Rincon, Rubian Camilo Saensz Rodriguez [Escuela Colombiana de Ingeniería Julio Garavito](https://www.escuelaing.edu.co/es/)
+**©** Carlos Andres Amorocho Amorocho, Jairo Eduardo Pulido Rincon, Rubian Camilo Saenz Rodriguez [Escuela Colombiana de Ingeniería Julio Garavito](https://www.escuelaing.edu.co/es/)
       
 Licencia bajo la [GNU General Public License](https://github.com/yoda-s-disciples/CinemApp/blob/master/LICENSE).
 
