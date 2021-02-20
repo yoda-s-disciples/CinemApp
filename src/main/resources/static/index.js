@@ -1,1 +1,1 @@
-alert("Bienvenidoa CinemApp, en el momento esta pagina no esta disponible, vuleve pronto.");
+alert("Bienvenidos a CinemApp, por el momento esta pagina no esta disponible, vuelve pronto.");
