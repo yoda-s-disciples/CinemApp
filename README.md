@@ -4,18 +4,16 @@
   <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Logo.jpeg?raw=true">
 </p>
 
-# Integrantes
+## Integrantes
 
-* [Carlos Andres Amorocho Amorocho]("https://github.com/Carlos96999")
-* [Jairo Eduardo Pulido Rincon]("https://github.com/Killersys")
-* [Rubian Camilo Saenz Rodriguez]("https://github.com/camilosaenz")
+* [Carlos Andres Amorocho Amorocho](https://github.com/Carlos96999)
+* [Jairo Eduardo Pulido Rincon](https://github.com/Killersys)
+* [Rubian Camilo Saenz Rodriguez](https://github.com/camilosaenz)
 
 ## Descripción CinemApp
 
-```
 La siguiente Aplicación Web permitirá a los usuarios poder comprar Tickets para entradas de películas en diferentes Cines.
 La persona se tendrá que registrar en la página y luego podrá acceder a la plataforma donde ya podrá buscar las películas ofrecidas por los distintos Cines y comprar los tickets deseados.
-```
 
 ## Heroku
 
@@ -34,6 +32,30 @@ La persona se tendrá que registrar en la página y luego podrá acceder a la pl
 [![Managed with Taiga.io](https://img.shields.io/badge/managed%20with-TAIGA.io-709f14.svg)](https://tree.taiga.io/project/jpulido-cineapp/timeline)
 
 ## Diagramas
+
+```
+Diagrama de Clases
+```
+
+<p align="center"> 
+  <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Diagrama%20de%20Clases.jpeg?raw=true">
+</p>
+
+```
+Diagrama de Entidad-Relación
+```
+
+<p align="center"> 
+  <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Diagrama%20de%20Entidad-Relacion.jpeg?raw=true">
+</p>
+
+```
+Diagrama de Casos de Uso
+```
+
+<p align="center"> 
+  <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Diagrama%20de%20Casos%20de%20Uso.jpeg?raw=true">
+</p>
 
 ## Mockups
 
@@ -83,7 +105,6 @@ Tickets
 <p align="center"> 
   <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Tickes.PNG?raw=true">
 </p>
-
 
 ```
 Información
