@@ -1,0 +1,1 @@
+alert("Bienvenidoa CinemApp, en el momento esta pagina no esta disponible, vuleve pronto.");
