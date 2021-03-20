@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<meta charset="utf-8">
+<title>CinemApp</title>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/apimock.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Tabs Titles -->
+			<h2 class="active">Registro</h2>
+
+
+			<!-- Icon -->
+			<div class="fadeIn first">
+				<img src="img/cinemapp.png" id="icon" alt="User Icon" />
+			</div>
+
+			<!-- Login Form -->
+
+			<form action="home.html" method="get" target="_blank">
+				<input type="text" id="username" class="fadeIn third" name="username"
+					placeholder="Username"> 
+				<input type="text" id="nombre" class="fadeIn second" name="nombre" 
+					placeholder="Nombre"> 
+				<input type="text" id="apellido" class="fadeIn third" name="apellido"
+					placeholder="Apellido"> 
+				<input type="text" id="correo" class="fadeIn third" name="correo"
+					placeholder="Correo"> 
+				<input type="password" id="password" class="fadeIn third" name="password"
+					placeholder="Password"> 
+			</form>
+
+			<button value="SingUp" class="btn float-right login_btn" onclick="apimock.createUser" id="login">Register</button>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Login CinemApp</title>
+<script src="js/apimock.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Tabs Titles -->
+			<h2 class="active">login</h2>
+
+			<!-- Icon -->
+			<div class="fadeIn first">
+				<img src="img/cinemapp.png" id="icon" alt="User Icon" />
+			</div>
+
+			<!-- Login Form -->
+
+			<form>
+				<h3>Login</h3>
+
+				<div className="input-group form-group">
+					<label>Username: </label> <input type="text" id="login"
+						className="form-control" class="fadeIn second"
+						placeholder="Enter username" />
+				</div>
+
+				<div className="form-group">
+					<label>Password</label> <input type="password" id="password"
+						className="form-control" class="fadeIn third"
+						placeholder="Enter password" />
+				</div>
+
+				<div className="form-group">
+					<div className="custom-control custom-checkbox">
+						<input type="checkbox" className="custom-control-input"
+							id="customCheck1" /> <label className="custom-control-label"
+							htmlFor="customCheck1">Remember me</label>
+					</div>
+				</div>
+
+				<button type="button" class="fadeIn fourth"
+						onclick="apimock.login()" className="btn btn-primary btn-block">LOGIN</button>
+			</form>
+
+			<!-- Remind Password -->
+			<div id="formFooter">
+				<a class="underlineHover" href="register.html">Registrarse</a>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
