@@ -17,6 +17,7 @@ public class CinemAppApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("inicio");
 		SpringApplication.run(CinemAppApplication.class, args);
 	}
 }

@@ -77,5 +77,16 @@ public class Usuario {
 	public void setSalas(List salas) {
 		this.salas = salas;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        return this.getCorreo() == ((Usuario) o).getCorreo();
+    }
 
 }

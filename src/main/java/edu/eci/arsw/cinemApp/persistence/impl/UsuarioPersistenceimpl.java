@@ -17,13 +17,9 @@ public class UsuarioPersistenceimpl implements UsuarioPersistence{
 	CinemAppDB cineMapDB = new CinemAppDB();
 
 	@Override
-	public List<Usuario> getAllUsers() throws UsuarioException {
-		return cineMapDB.getAllUsers();
-	}
-	
-	@Override
-	public Usuario getUsuarioByUsername(String username) throws UsuarioException{
-		return cineMapDB.getUsuarioByUsername(username);
+	public Usuario getUsers(String email) throws UsuarioException{
+		System.out.println("persistence");
+		return cineMapDB.getUsers(email);
 	}
 
 	//@Override

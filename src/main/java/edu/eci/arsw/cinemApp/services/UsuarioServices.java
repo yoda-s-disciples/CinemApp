@@ -15,16 +15,13 @@ public class UsuarioServices {
 	@Autowired
 	private UsuarioPersistence usuarioPersistence;
 
-	public List<Usuario> getAllUsers() throws UsuarioException{
-		return usuarioPersistence.getAllUsers();
-	}
-
 	public void createNewUser(Usuario user) throws UsuarioException {
 		usuarioPersistence.createNewUser(user);
 	}
 
-	public Usuario getUsers(String username) throws UsuarioException {
-		return usuarioPersistence.getUsuarioByUsername(username);
+	public Object getUsers(String email) throws UsuarioException {
+		System.out.println("Services");
+		return usuarioPersistence.getUsers((String) email);
 	}
 	
 	

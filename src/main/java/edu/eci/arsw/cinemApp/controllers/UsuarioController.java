@@ -31,23 +31,23 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices usuarioServices; 
 	
-	@RequestMapping(method = RequestMethod.GET, path = "/users/{username:.+}")
-	public ResponseEntity<?> getUsers(@PathVariable String username){
+	@RequestMapping(path = "/Users/{userEmail:.+}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUsers(@PathVariable String userEmail){
 		try {
-			Usuario user = usuarioServices.getUsers(username);
+			Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}catch(UsuarioException e) {
+			System.out.println("Entro");
 			e.printStackTrace();
-			Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, path = "/users")
-	public ResponseEntity<?> getAllUsers(@RequestBody String usuario) throws NoSuchAlgorithmException{
+	@RequestMapping(path = "/Users", method = RequestMethod.POST)
+	public ResponseEntity<?> postUsers(@RequestBody String usuario) throws NoSuchAlgorithmException{
 		try {
 			JSONObject obj = new JSONObject(usuario);
-			String username = obj.getString("username");
+			String email = obj.getString("email");
 			String password = obj.getString("password");
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			byte[] bytes = digest.digest(password.getBytes());
@@ -56,18 +56,22 @@ public class UsuarioController {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
 			String psswdHash = sb.toString();
-			Usuario user = (Usuario) usuarioServices.getUsers(username);
-			if(user.getPassword().equals(psswdHash))
-				return new ResponseEntity<>(usuarioServices.getUsers(username), HttpStatus.ACCEPTED);
-			else
+			Usuario user = (Usuario) usuarioServices.getUsers(email);
+			if(user.getPassword().equals(psswdHash)) {
+				System.out.println("Controller");
+				return new ResponseEntity<>(usuarioServices.getUsers(email), HttpStatus.OK);
+			}
+			else{
 				return new ResponseEntity<>("Password Incorrecta!", HttpStatus.UNAUTHORIZED);
+			}
 		}catch (UsuarioException e) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("fuck");
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 	}
 	
-	@RequestMapping(method = RequestMethod.POST , path = "/addUser")
+	@RequestMapping(path = "/addUser", method = RequestMethod.POST)
 	public ResponseEntity<?> createNewUser(@RequestBody String usuario) throws NoSuchAlgorithmException{
 		JSONObject obj = new JSONObject(usuario);
 		String password = obj.getString("password1");
@@ -78,7 +82,7 @@ public class UsuarioController {
             sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
         }
 		String psswdHash = sb.toString();
-		Usuario user = new Usuario(obj.getString("username"), obj.getString("nombre"), obj.getString("apellido"), obj.getString("correo"), psswdHash);
+		Usuario user = new Usuario(obj.getString("alias"), obj.getString("name"), obj.getString("lastname"), obj.getString("email"), psswdHash);
 		try {
 			usuarioServices.createNewUser(user);
 			return new ResponseEntity<>(HttpStatus.CREATED);

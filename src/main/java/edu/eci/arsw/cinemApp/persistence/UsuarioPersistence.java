@@ -7,10 +7,8 @@ import edu.eci.arsw.cinemApp.model.Usuario;
 
 public interface UsuarioPersistence {
 
-	public List<Usuario> getAllUsers() throws UsuarioException;
-
 	public void createNewUser(Usuario user) throws UsuarioException;
 
-	public Usuario getUsuarioByUsername(String username) throws UsuarioException;
+	public Usuario getUsers(String email) throws UsuarioException;
 
 }
