@@ -46,9 +46,6 @@ var app = (function () {
                     contentType: "application/json",
                     success: function () {
                         location.href = "home.html";
-                    },
-                    error: function () {
-
                     }
                 });
             }

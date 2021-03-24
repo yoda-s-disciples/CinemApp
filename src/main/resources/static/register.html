@@ -1,17 +1,29 @@
 <html>
 
-	<head>
-		<title>Login CinemApp</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="js/app.js"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<link rel="stylesheet" href="css/styles.css">
-	</head>
+<head>
+	<title>Register CinemApp</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/fontAwesome.css">
+	<link rel="stylesheet" href="css/light-box.css">
+	<link rel="stylesheet" href="css/owl-carousel.css">
+	<link rel="stylesheet" href="css/templatemo-style.css">
+	<link rel="stylesheet" href="js/app.js">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
 
-<body>
+<body background="img/harryPotter.jpg">
 	<div class="wrapper fadeInDown">
 		<div id="formContent">
 			<!-- Tabs Titles -->
@@ -22,13 +34,13 @@
 			</div>
 			<!-- Login Form -->
 			<form>
-				<input type="text" id="username" class="fadeIn third" name="username" placeholder="sad">
+				<input type="text" id="username" class="fadeIn third" name="username" placeholder="Username">
 				<input type="text" id="nombre" class="fadeIn second" name="nombre" placeholder="Nombre">
 				<input type="text" id="apellido" class="fadeIn third" name="apellido" placeholder="Apellido">
-				<input type="mail" id="correo" class="fadeIn third" name="correo" placeholder="Correo">
+				<input type="email" id="correo" class="fadeIn third" name="correo" placeholder="Correo">
 				<input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
 			</form>
-			<button onclick="app.crear()">Register</button>
+			<button class="btn btn-primary" onclick="app.crear()">Register</button>
 		</div>
 	</div>
 </body>
