@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.eci.arsw.cinemApp.exceptions.UsuarioException;
+import edu.eci.arsw.cinemApp.model.Pelicula;
 import edu.eci.arsw.cinemApp.model.Usuario;
 
 public class CinemAppDB {
@@ -83,6 +84,35 @@ public class CinemAppDB {
 		}
 		return null;
 		
+	}
+
+	public List<Pelicula> getPeliculas() {
+		List<Pelicula> peliculas = new ArrayList<Pelicula>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			}catch(Exception e) {
+				
+			}
+		}
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("Select * from pelicula;");
+			ResultSet resultSet = pstmt.executeQuery();
+			Pelicula pelicula = null;
+			while(resultSet.next()) {
+				pelicula = new Pelicula(resultSet.getString("nombre"), resultSet.getString("duracion"), resultSet.getString("calificacion"), resultSet.getString("horario"), resultSet.getString("genero"), resultSet.getString("id"), resultSet.getString("poster"), resultSet.getString("director"));
+				peliculas.add(pelicula);
+			}
+			resultSet.close();
+			pstmt.close();
+			return peliculas;
+		}catch(Exception e) {
+		}
+		return null;
 	}
 
 }

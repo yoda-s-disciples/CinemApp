@@ -37,7 +37,6 @@ public class UsuarioController {
 			Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}catch(UsuarioException e) {
-			System.out.println("Entro");
 			e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}
@@ -58,7 +57,6 @@ public class UsuarioController {
 			String psswdHash = sb.toString();
 			Usuario user = (Usuario) usuarioServices.getUsers(email);
 			if(user.getPassword().equals(psswdHash)) {
-				System.out.println("Controller");
 				return new ResponseEntity<>(usuarioServices.getUsers(email), HttpStatus.OK);
 			}
 			else{
