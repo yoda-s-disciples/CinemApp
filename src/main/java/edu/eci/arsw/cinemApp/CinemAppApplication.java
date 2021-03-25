@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Camilo
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"edu.ecu.arsw.cinemApp"})
+@ComponentScan(basePackages = {"edu.eci.arsw.cinemApp"})
 public class CinemAppApplication {
 	
 	/**

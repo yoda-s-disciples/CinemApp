@@ -17,7 +17,7 @@ var app = (function () {
     var email;
 
     var ingresar = function(){
-        user.username = document.getElementById("username").value;
+        user.email = document.getElementById("username").value;
         user.password = document.getElementById("password").value;
         $.ajax({
             url: "/usuario/Users",

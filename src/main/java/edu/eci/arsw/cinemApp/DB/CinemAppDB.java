@@ -54,7 +54,6 @@ public class CinemAppDB {
 	}
 
 	public Usuario getUsers(String email) throws UsuarioException {
-		System.out.println("entro DB");
 		PreparedStatement pstmt = null;
 		if (connection == null) {
 			try {
@@ -74,14 +73,11 @@ public class CinemAppDB {
 			ResultSet resultSet = pstmt.executeQuery();
 			Usuario usuario = null;
 			while(resultSet.next()) {
-				System.out.println("DATA");
 				string = resultSet.getString("password");
 				usuario = new Usuario(resultSet.getString("username"), resultSet.getString("nombre"), resultSet.getString("apellido"), resultSet.getString("correo"), resultSet.getString("password"));
-				System.out.println(usuario);
 			}
 			resultSet.close();
 			pstmt.close();
-			System.out.println("db");
 			return usuario;
 		}catch(Exception e) {
 		}

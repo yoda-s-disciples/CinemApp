@@ -31,7 +31,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices usuarioServices; 
 	
-	@RequestMapping(path = "/Users/{userEmail:.+}", method = RequestMethod.GET)
+	@RequestMapping(path = "/Users", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers(@PathVariable String userEmail){
 		try {
 			Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
@@ -62,12 +62,10 @@ public class UsuarioController {
 				return new ResponseEntity<>(usuarioServices.getUsers(email), HttpStatus.OK);
 			}
 			else{
-				System.out.println("else");
 				return new ResponseEntity<>("Password Incorrecta!", HttpStatus.UNAUTHORIZED);
 			}
 		}catch (UsuarioException e) {
             Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, e);
-            System.out.println("fuck");
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 	}

@@ -19,8 +19,7 @@ public class UsuarioServices {
 		usuarioPersistence.createNewUser(user);
 	}
 
-	public Object getUsers(String email) throws UsuarioException {
-		System.out.println("Services");
+	public Object getUsers(Object email) throws UsuarioException {
 		return usuarioPersistence.getUsers((String) email);
 	}
 	

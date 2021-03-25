@@ -18,7 +18,6 @@ public class UsuarioPersistenceimpl implements UsuarioPersistence{
 
 	@Override
 	public Usuario getUsers(String email) throws UsuarioException{
-		System.out.println("persistence");
 		return cineMapDB.getUsers(email);
 	}
 
