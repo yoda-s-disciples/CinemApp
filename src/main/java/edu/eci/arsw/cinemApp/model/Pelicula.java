@@ -12,8 +12,8 @@ public class Pelicula {
 	public String id;
 	public String poster;
 	public String director;
-	public List usuarios;
-	public List cinemas;
+	//public List usuarios;
+	//public List cinemas;
 
 	public Pelicula(String nombre, String duracion, String calificacion, String horario, String genero, String id, String poster, String director) {
 
@@ -23,6 +23,8 @@ public class Pelicula {
 		this.horario = horario;
 		this.genero = genero;
 		this.id = id;
+		this.poster = poster;
+		this.director = director;
 
 	}
 
@@ -65,7 +67,7 @@ public class Pelicula {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-
+	/*
 	public List getUsuarios() {
 		return usuarios;
 	}
@@ -73,7 +75,7 @@ public class Pelicula {
 	public void setUsuarios(List usuarios) {
 		this.usuarios = usuarios;
 	}
-
+	
 	public List getCinemas() {
 		return cinemas;
 	}
@@ -81,7 +83,7 @@ public class Pelicula {
 	public void setCinemas(List cinemas) {
 		this.cinemas = cinemas;
 	}
-
+	*/
 	public String getId() {
 		return id;
 	}

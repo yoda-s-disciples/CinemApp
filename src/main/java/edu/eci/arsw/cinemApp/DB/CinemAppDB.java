@@ -85,8 +85,11 @@ public class CinemAppDB {
 		return null;
 		
 	}
+	
+	/* PELICULAS */
 
 	public List<Pelicula> getPeliculas() {
+		System.out.println("DB");
 		List<Pelicula> peliculas = new ArrayList<Pelicula>();
 		PreparedStatement pstmt = null;
 		if (connection == null) {
@@ -98,6 +101,7 @@ public class CinemAppDB {
 			}
 		}
 		try {
+			System.out.println("DB TRY");
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
 			pstmt = connection.prepareStatement("Select * from pelicula;");
@@ -106,6 +110,8 @@ public class CinemAppDB {
 			while(resultSet.next()) {
 				pelicula = new Pelicula(resultSet.getString("nombre"), resultSet.getString("duracion"), resultSet.getString("calificacion"), resultSet.getString("horario"), resultSet.getString("genero"), resultSet.getString("id"), resultSet.getString("poster"), resultSet.getString("director"));
 				peliculas.add(pelicula);
+				System.out.println(pelicula.getNombre());
+				System.out.println(pelicula.getDirector());
 			}
 			resultSet.close();
 			pstmt.close();

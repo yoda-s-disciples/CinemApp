@@ -8,7 +8,7 @@ var app = (function () {
         email: null,
         password1: null
     }
-
+    
     var peliculas = {
         namePelicula: null,
         duracionPelicula: null,
@@ -28,7 +28,17 @@ var app = (function () {
     var lastname;
     var email;
 
-    var ingresar = function(){
+    var namePeliculas;
+    var duracionPeliculas;
+    var calificacionPeliculas;
+    var horarioPeliculas;
+    var generoPeliculas;
+    var idPeliculas;
+    var posterPeliculas;
+    var directorPeliculas;
+
+
+    var ingresar = function () {
         user.email = document.getElementById("username").value;
         user.password = document.getElementById("password").value;
         $.ajax({
@@ -42,93 +52,101 @@ var app = (function () {
         });
     }
 
-    var crear = function(){
+    var crear = function () {
         user.alias = document.getElementById("username").value;
         user.name = document.getElementById("nombre").value
-        user.lastname= document.getElementById("apellido").value;
+        user.lastname = document.getElementById("apellido").value;
         user.email = document.getElementById("correo").value;
         user.password1 = document.getElementById("password").value;
         var newUser = "{\"username\":" + alias + ",\"nombre\":'" + name + "',\"apellido\":'" + lastname + "',\"correo\":'" + email + "',\password\":'" + password1 + "'}";
-        if((user.email).includes('@')===true){
-            if((user.email).includes('.')===true){
+        if ((user.email).includes('@') === true) {
+            if ((user.email).includes('.') === true) {
                 var crear = $.ajax({
                     url: "/usuario/addUser",
                     type: 'POST',
                     data: JSON.stringify(user),
                     contentType: "application/json",
                     success: function () {
-                        location.href = "home.html";
+                        location.href = "login.html";
                     }
                 });
             }
         }
-        
+
     }
 
-    var getPelicula = function(){
-        apiclient.getPelicula(createTable, callback);
+
+    var getPelicula = function () {
+        //apiclient.getPelicula(createTable);
+        $.get("pelicula/Movies", function (peliculon) {
+            console.info(peliculon);
+            createTable(peliculon);
+
+        });
+
     }
 
-    var createTable = function(){
-        peliculas = map(peliculas);
-        $("#table > tbody").emply();
-        peliculas.map(function(peli){
-            var idpelicula = '"' + String(peli.id) + '"';
+    var createTable = function (list) {
+        list = map(list);
+        $("#table > tbody").empty();
+        list.map(function (peliculas) {
+            var idpelicula = '"' + String(peliculas.id) + '"';
             $("#table > tbody").append(
                 "<tr> <td>" +
-                peli.namePelicula +
+                peliculas.namePeliculas +
                 "</td>" +
                 "<td>" +
-                peli.duracionPelicula +
+                peliculas.duracionPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.calificacionPelicula +
+                peliculas.calificacionPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.horarioPelicula +
+                peliculas.horarioPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.generoPelicula +
+                peliculas.generoPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.idPelicula +
+                peliculas.idPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.posterPelicula +
+                peliculas.posterPeliculas +
                 "</td> " +
                 "<td>" +
-                peli.directorPelicula +
+                peliculas.directorPeliculas +
                 "</td> " +
-                 "<td><form><button class='btn btn-secondary' type='button' onclick='app.abrirPelicula("+ idpelicula +")'>Abrir</button></form></td>"
-                 +
+                "<td><form><button class='btn btn-secondary' type='button' onclick='abrirPelicula(" + idpelicula + ")'>Abrir</button></form></td>"
+                +
                 "</tr>"
             )
         });
     }
 
-    var abrirPelicula = function(){
+    var abrirPelicula = function () {
         location.href = "cinema.html";
     }
 
-    var map = function(list){
-        return mapping = list.map(function(peliculas){
+    var map = function (list) {
+        return mapping = list.map(function (peliculas) {
             return {
-                namePelicula : peliculas.namePelicula,
-                duracionPelicula : peliculas.duracionPelicula,
-                calificacionPelicula : peliculas.calificacionPelicula,
-                horarioPelicula : peliculas.horarioPelicula,
-                generoPelicula : peliculas.generoPelicula,
-                idPelicula : peliculas.idPelicula,
-                posterPelicula : peliculas.posterPelicula,
-                directorPelicula : peliculas.directorPelicula
+                namePeliculas: peliculas.namePelicula,
+                duracionPeliculas: peliculas.duracionPelicula,
+                calificacionPeliculas: peliculas.calificacionPelicula,
+                horarioPeliculas: peliculas.horarioPelicula,
+                generoPeliculas: peliculas.generoPelicula,
+                idPeliculas: peliculas.idPelicula,
+                posterPeliculas: peliculas.posterPelicula,
+                directorPeliculas: peliculas.directorPelicula
             };
         })
     }
 
     return {
-        ingresar : ingresar,
-        crear : crear,
-        getPelicula : getPelicula
+        ingresar: ingresar,
+        crear: crear,
+        getPelicula: getPelicula,
+        createTable: createTable
     }
-	
+
 })();

@@ -34,8 +34,8 @@ public class UsuarioController {
 	@RequestMapping(path = "/Users", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers(@PathVariable String userEmail){
 		try {
-			Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
-			return new ResponseEntity<>(user, HttpStatus.OK);
+			//Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
+			return new ResponseEntity<>((Usuario) usuarioServices.getUsers(userEmail), HttpStatus.OK);
 		}catch(UsuarioException e) {
 			e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
