@@ -7,10 +7,12 @@ public class Cinema {
 	public String nombre;
 	public List sedes;
 	public String id;
+	public String logo;
 	
-	public Cinema(String nombre, String id) {
+	public Cinema(String nombre, String id, String logo) {
 		this.nombre = nombre;
 		this.id = id;
+		this.logo = logo;
 	}
 
 	public String getNombre() {
@@ -35,6 +37,14 @@ public class Cinema {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	
 }

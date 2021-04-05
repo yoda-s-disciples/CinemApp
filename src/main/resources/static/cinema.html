@@ -27,25 +27,69 @@
 	<link rel="styleheet" type="text/css" href="css/sweetalert.css">
 </head>
 
-<body onload="app.abrirPelicula()">
+<body onload="app.getPeliculaByID()">
 
-	<div class="container">
-		<table class="table" id="table">
-			<thead>
-				<tr>
-					<th> Pelicula </th>
-					<th> Nombre </th>
-					<th> Duracion </th>
-					<th> Genero </th>
-					<th> Director </th>
-					<th> Abrir </th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-			</tbody>
-		</table>
+	<div class="slider">
+		<div class="Modern-Slider content-section" id="top">
+			<!-- Item -->
+			<div class="item item-1">
+				<div class="img-fill">
+					<div class="image"></div>
+				</div>
+			</div>
+			<!-- Item -->
+			<div class="item item-5">
+				<div class="img-fill">
+					<div class="image"></div>
+				</div>
+			</div>
+			<!-- Item -->
+			<div class="item item-6">
+				<div class="img-fill">
+					<div class="image"></div>
+				</div>
+			</div>
+
+
+		</div>
+		<div class="container">
+			<table class="table" id="table">
+				<thead>
+					<tr>
+						<th> Pelicula </th>
+						<th> Nombre </th>
+						<th> Duracion </th>
+						<th> Genero </th>
+						<th> Director </th>
+						<th> Abrir </th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-content">
+			<button class="btn btn-primary" onclick="app.getCinemas()">Cinemas</button>
+			<div class="container">
+				<table class="table" id="table">
+					<thead>
+						<tr>
+							<th> Cinema </th>
+							<th> Nombre </th>
+							<th> Salas </th>>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
+
+	
+	
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
