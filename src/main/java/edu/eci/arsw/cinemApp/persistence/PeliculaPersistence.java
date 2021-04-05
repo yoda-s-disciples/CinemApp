@@ -9,4 +9,6 @@ public interface PeliculaPersistence {
 
 	public List<Pelicula> getPeliculas() throws PeliculaException;
 
+	public List<Pelicula> getPeliculaByID(String id) throws PeliculaException;
+
 }

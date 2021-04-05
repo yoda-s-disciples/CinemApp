@@ -8,7 +8,7 @@ var app = (function () {
         email: null,
         password1: null
     }
-    
+
     var peliculas = {
         namePelicula: null,
         duracionPelicula: null,
@@ -27,16 +27,6 @@ var app = (function () {
     var name;
     var lastname;
     var email;
-
-    var namePeliculas;
-    var duracionPeliculas;
-    var calificacionPeliculas;
-    var horarioPeliculas;
-    var generoPeliculas;
-    var idPeliculas;
-    var posterPeliculas;
-    var directorPeliculas;
-
 
     var ingresar = function () {
         user.email = document.getElementById("username").value;
@@ -77,147 +67,122 @@ var app = (function () {
 
 
     var getPelicula = function () {
-		console.log("Peliculón");
-		//apiclient.getPelicula(createTable);
-		//console.info(peliculas);
-		//console.info(Object.values(peliculas));
-        
-		$.get("pelicula/Movies", function (peliculon) {
-			console.log("Peliculas");
-			peliculas = peliculon;
-			console.info(peliculas);
-			console.log("Peliculón");
-			console.info(peliculon);
-			console.log(peliculon.length)
-			console.log(peliculon[0]);
-			console.log(Object.values(peliculon[0]));
-			console.log(peliculon[0]["nombre"]);
-			//peliculas.namePelicula= peliculon[0]["nombre"];
-			//namePeliculas= peliculon[0]["nombre"];
-			//console.info(peliculas.namePelicula);
-			//console.info(namePeliculas);
-            createTable(peliculon);
 
+        $.get("pelicula/Movies", function (peliculon) {
+            peliculas = peliculon;
+            createTable(peliculon);
         });
 
     }
 
     var createTable = function (list) {
-		console.log("list antes de map");
-		console.info(list);
         list = map(list);
-		console.log("list después de map");
-		console.info(list);
-		console.log("namePeliculas después del return");
-		console.info(namePeliculas);
         $("#table > tbody").empty();
         list.map(function (peliculas) {
-            var idpelicula = '"' + String(peliculas.id) + '"';
-			console.info(peliculas.namePelicula);
+            var idpeliculas = '"' + String(peliculas.id) + '"';
             $("#table > tbody").append(
                 "<tr> <td>" +
+                "<img src='" + peliculas.posterPeliculas + "' width='225' height='300' >" +
+                "</td>" +
+                "<td>" +
                 peliculas.namePeliculas +
                 "</td>" +
                 "<td>" +
                 peliculas.duracionPeliculas +
                 "</td> " +
                 "<td>" +
-                peliculas.calificacionPeliculas +
-                "</td> " +
-                "<td>" +
-                //peliculas.horarioPeliculas +
-                //"</td> " +
-                //"<td>" +
                 peliculas.generoPeliculas +
-                "</td> " +
-                "<td>" +
-                //peliculas.idPeliculas +
-                //"</td> " +
-                //"<td>" +
-                inicio(peliculas.posterPeliculas) +
-				//peliculas.posterPeliculas +
                 "</td> " +
                 "<td>" +
                 peliculas.directorPeliculas +
                 "</td> " +
-                "<td><form><button class='btn btn-secondary' type='button' onclick='abrirPelicula(" + idpelicula + ")'>Abrir</button></form></td>"
-                +
+                "<td><form><button class='btn btn-secondary' type='button' onclick='app.abrirPelicula(\"" + peliculas.idPeliculas + "\")'>Abrir Cinema</button></form></td>'" +
                 "</tr>"
             )
         });
     }
 
-    var abrirPelicula = function () {
-        location.href = "cinema.html";
+    var abrirPelicula = function (peliculaID) {
+        console.info(peliculaID);
+        getPeliculaByID(peliculaID);
+        
+    }
+    
+    var getPeliculaByID = function (id){
+        console.info(id);
+        $.get("pelicula/Movies/" + id, function (peliculon) {
+            peliculas = peliculon;
+            console.info(peliculon);
+            createTableByID(peliculon);
+        });
     }
 
-    var map = function (list) {
-		console.log("list en map");
-		console.info(list);
-		console.log("Peliculas en map");
-		console.info(peliculas);
-		console.info(peliculas.namePelicula);
-		console.log("namePeliculas antes del return");
-		console.info(namePeliculas);
-        return mapping = list.map(function (peliculas) {
-			console.log("Peliculas en el return");
-			console.log(peliculas);
-			console.log(peliculas["nombre"]);
-			console.info(peliculas["duracion"]);
-			console.info(peliculas["calificacion"]);
-			console.info(peliculas["horario"]);
-			console.info(peliculas["genero"]);
-			console.info(peliculas["id"]);
-			console.info(peliculas["poster"]);
-			console.info(peliculas["director"]);
-			console.info(peliculas.directorPelicula);
-            return {
-                /*
-				namePeliculas: peliculas.namePelicula,
-                duracionPeliculas: peliculas.duracionPelicula,
-                calificacionPeliculas: peliculas.calificacionPelicula,
-                horarioPeliculas: peliculas.horarioPelicula,
-                generoPeliculas: peliculas.generoPelicula,
-                idPeliculas: peliculas.idPelicula,
-                posterPeliculas: peliculas.posterPelicula,
-                directorPeliculas: peliculas.directorPelicula,
-				*/
-				namePeliculas: peliculas["nombre"],
-				duracionPeliculas: peliculas["duracion"],
-				calificacionPeliculas: peliculas["calificacion"],
-				//horarioPeliculas: peliculas["horario"],
-				generoPeliculas: peliculas["genero"],
-				idPeliculas: peliculas["id"],
-				posterPeliculas: peliculas["poster"],
-				directorPeliculas: peliculas["director"],
+    var createTableByID = function (list) {
+        list = map2(list);
+        $("#table > tbody").empty();
+        list.map(function (peliculas) {
+            var idpeliculas = '"' + String(peliculas.id) + '"';
+            $("#table > tbody").append(
+                "<tr> <td>" +
+                "<img src='" + peliculas.posterPelicula + "' width='225' height='300' >" +
+                "</td>" +
+                "<td>" +
+                peliculas.namePelicula +
+                "</td>" +
+                "<td>" +
+                peliculas.duracionPelicula +
+                "</td> " +
+                "<td>" +
+                peliculas.generoPelicula +
+                "</td> " +
+                "<td>" +
+                peliculas.directorPelicula +
+                "</td> " +
+                "</tr>"
+            )
+        });
+    }
+
+    var map2 = function (list) {
+        return mapeo = list.map(function(peliculas){
+            //console.info(peliculas);
+            return{
+                namePelicula: peliculas["nombre"],
+                duracionPelicula: peliculas["duracion"],
+                calificacionPelicula: peliculas["calificacion"],
+                horarioPelicula: peliculas["horario"],
+                generoPelicula: peliculas["genero"],
+                idPelicula: peliculas["id"],
+                posterPelicula: peliculas["poster"],
+                directorPelicula: peliculas["director"],
             };
         })
     }
-	
-	function inicio(url){
-		var nuevaImagen = new Image();
 
-        alert("Se procede a la carga en memoria de la imagen");
-		return nuevaImagen = cargarImagen(url);
-        //return nuevaImagen = cargarImagen("ejemplo.png");
-	}
+    var map = function (list) {
+        return mapping = list.map(function (peliculas) {
+            return {
+                namePeliculas: peliculas["nombre"],
+                duracionPeliculas: peliculas["duracion"],
+                calificacionPeliculas: peliculas["calificacion"],
+                horarioPeliculas: peliculas["horario"],
+                generoPeliculas: peliculas["genero"],
+                idPeliculas: peliculas["id"],
+                posterPeliculas: peliculas["poster"],
+                directorPeliculas: peliculas["director"],
+            };
 
-	function cargarImagen(url){
-        var imagen = new Image();
-        imagen.onload = imagenCargada;
-        imagen.src = "img/featured_1.jpg";
-        return imagen;
+        })
     }
 
-    function imagenCargada(){
-        alert("La imagen se ha cargado correctamente");
-    }
-	  
     return {
         ingresar: ingresar,
         crear: crear,
         getPelicula: getPelicula,
-        createTable: createTable
+        createTable: createTable,
+        abrirPelicula: abrirPelicula,
+        getPeliculaByID: getPeliculaByID,
+        createTableByID: createTableByID
     }
 
 })();

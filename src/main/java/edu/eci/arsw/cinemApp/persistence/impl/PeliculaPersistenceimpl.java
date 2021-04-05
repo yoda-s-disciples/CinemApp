@@ -16,8 +16,12 @@ public class PeliculaPersistenceimpl implements PeliculaPersistence{
 	
 	@Override
 	public List<Pelicula> getPeliculas() throws PeliculaException {
-		System.out.println("Persistence");
 		return cineMapDB.getPeliculas();
+	}
+
+	@Override
+	public List<Pelicula> getPeliculaByID(String id) throws PeliculaException {
+		return cineMapDB.getPeliculaById(id);
 	}
 
 }

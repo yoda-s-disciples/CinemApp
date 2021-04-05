@@ -23,13 +23,22 @@ public class PeliculaController {
 	@RequestMapping(path = "/Movies", method = RequestMethod.GET)
 	public ResponseEntity<?> getPeliculas(){
 		try {
-			System.out.println("Controller");
 			return new ResponseEntity<>(peliculaServices.getPeliculas(), HttpStatus.OK);
 		}catch(PeliculaException e) {
-			System.out.println("Controller else");
 			e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping(path = "/Movies/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getPeliculaByID(@PathVariable("id") String id){
+		try {
+			return new ResponseEntity<>(peliculaServices.getPeliculaByID(id), HttpStatus.OK);
+		}catch(PeliculaException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
+		}
+	}
+	
 
 }

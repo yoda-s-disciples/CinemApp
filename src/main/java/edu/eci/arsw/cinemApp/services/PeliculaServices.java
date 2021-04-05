@@ -16,8 +16,11 @@ public class PeliculaServices {
 	private PeliculaPersistence peliculaPersistence;
 
 	public List<Pelicula> getPeliculas() throws PeliculaException{
-		System.out.println("Services");
 		return peliculaPersistence.getPeliculas();
+	}
+
+	public List<Pelicula> getPeliculaByID(String id) throws PeliculaException{
+		return peliculaPersistence.getPeliculaByID(id);
 	}
 
 }
