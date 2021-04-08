@@ -10,7 +10,7 @@
 		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/app.js"></script>
-	<script src="js/apiclient.js"></script>>
+	<script src="js/apiclient.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -28,32 +28,10 @@
 </head>
 
 <body onload="app.getPeliculaByID()">
-
-	<div class="slider">
-		<div class="Modern-Slider content-section" id="top">
-			<!-- Item -->
-			<div class="item item-1">
-				<div class="img-fill">
-					<div class="image"></div>
-				</div>
-			</div>
-			<!-- Item -->
-			<div class="item item-5">
-				<div class="img-fill">
-					<div class="image"></div>
-				</div>
-			</div>
-			<!-- Item -->
-			<div class="item item-6">
-				<div class="img-fill">
-					<div class="image"></div>
-				</div>
-			</div>
-
-
-		</div>
+	<script>console.info("EntroGetPelicula")</script>
+	<div class="page-content">
 		<div class="container">
-			<table class="table" id="table">
+			<table class="table" id="tablePelicula">
 				<thead>
 					<tr>
 						<th> Pelicula </th>
@@ -61,7 +39,6 @@
 						<th> Duracion </th>
 						<th> Genero </th>
 						<th> Director </th>
-						<th> Abrir </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -69,27 +46,25 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="page-content">
-			<button class="btn btn-primary" onclick="app.getCinemas()">Cinemas</button>
-			<div class="container">
-				<table class="table" id="table">
-					<thead>
-						<tr>
-							<th> Cinema </th>
-							<th> Nombre </th>
-							<th> Salas </th>>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-					</tbody>
-				</table>
-			</div>
-		</div>
+
 	</div>
 
-	
-	
+	<div class="page-content">
+		<div class="container">
+			<table class="table" id="tableCinema">
+				<thead>
+					<tr>
+						<th> Cinema </th>
+						<th> Nombre </th>
+						<th> Salas </th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>

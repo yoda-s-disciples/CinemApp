@@ -39,6 +39,5 @@ public class PeliculaController {
 			return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}
 	}
-	
 
 }

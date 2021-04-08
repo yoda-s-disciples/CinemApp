@@ -139,7 +139,7 @@ public class CinemAppDB {
 		try {
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
-			pstmt = connection.prepareStatement("Select * from pelicula where id = ?");
+			pstmt = connection.prepareStatement("Select * from pelicula where id = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pstmt.setString(1, id);
 			ResultSet resultSet = pstmt.executeQuery();
 			Pelicula pelicula = null;
@@ -162,8 +162,7 @@ public class CinemAppDB {
 	/* CINEMAS */
 	
 	public List<Cinema> getCinemas() {
-		System.out.println("Entro Db");
-		List<Cinema> cinemas = new ArrayList<>();
+		List<Cinema> cinemas = new ArrayList<Cinema>();
 		PreparedStatement pstmt = null;
 		if (connection == null) {
 			try {
@@ -175,15 +174,61 @@ public class CinemAppDB {
 		}try {
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
-			pstmt = connection.prepareStatement("Select * from cinema;");
+			pstmt = connection.prepareStatement("select * from cinema;");
 			ResultSet resultSet = pstmt.executeQuery();
 			Cinema cinema = null;
 			while (resultSet.next()) {
 				cinema = new Cinema(resultSet.getString("nombre"), resultSet.getString("id"), resultSet.getString("logo"));
 				cinemas.add(cinema);
+			}
+			resultSet.close();
+			pstmt.close();
+			return cinemas;
+		}catch (Exception e) {
+		}
+		return null;
+	}
+	
+	public List<Cinema> getCinemasById(String idPelicula) {
+		System.out.println("Entro Db");
+		System.out.println(idPelicula);
+		List<Cinema> cinemas = new ArrayList<Cinema>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			System.out.println("Entro Db try");
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			
+			//pstmt = connection.prepareStatement("Select nombre, logo from cinema, pelicula_cinema where idpelicula = '02' and  idcinema=id;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			//"SELECT tm.tipo,  m.cantidad,  m.fecha FROM movimientos AS m INNER JOIN tipos_movimiento AS tm ON tm.id=m.tipo WHERE m.codigo=?";
+			pstmt = connection.prepareStatement("Select c.nombre, c.id, c.logo from cinema as c INNER JOIN pelicula_cinema as pc ON c.id=pc.idcinema where pc.idpelicula = ?");
+			System.out.println(pstmt.getResultSet());
+			System.out.println("pstmt "+pstmt);
+			pstmt.setString(1, idPelicula);
+			System.out.println("CinemaID" + idPelicula);
+			ResultSet resultSet = pstmt.executeQuery();
+			Cinema cinema = null;
+			System.out.println("rs "+resultSet.getFetchSize());
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString("nombre"));
+				System.out.println(resultSet.getString("id"));
+				System.out.println(resultSet.getString("logo"));
+				System.out.println("while");
+				cinema = new Cinema(resultSet.getString("nombre"), resultSet.getString("id"), resultSet.getString("logo"));
+				cinemas.add(cinema);
 				System.out.println(cinema.getNombre());
 			}
-			
+			System.out.println(cinema.getNombre());
+			resultSet.close();
+			pstmt.close();
+			return cinemas;
 		}catch (Exception e) {
 		}
 		return null;

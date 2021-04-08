@@ -5,9 +5,9 @@ import java.util.List;
 public class Cinema {
 	
 	public String nombre;
-	public List sedes;
 	public String id;
 	public String logo;
+	
 	
 	public Cinema(String nombre, String id, String logo) {
 		this.nombre = nombre;
@@ -21,14 +21,6 @@ public class Cinema {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List getSedes() {
-		return sedes;
-	}
-
-	public void setSedes(List sedes) {
-		this.sedes = sedes;
 	}
 
 	public String getId() {

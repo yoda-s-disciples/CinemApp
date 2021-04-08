@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.cinemApp.DB.CinemAppDB;
 import edu.eci.arsw.cinemApp.model.Cinema;
+import edu.eci.arsw.cinemApp.model.Pelicula;
 import edu.eci.arsw.cinemApp.persistence.CinemaPersistence;
 
 @Service
@@ -15,8 +16,13 @@ public class CinemaPersistencimpl implements CinemaPersistence{
 	
 	@Override
 	public List<Cinema> getCinemas() {
-		System.out.println("Persistencia");
 		return cineMapDB.getCinemas();
+	}
+	
+	@Override
+	public List<Cinema> getCinemasById(String id) {
+		System.out.println("Persistencia");
+		return cineMapDB.getCinemasById(id);
 	}
 	
 }
