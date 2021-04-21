@@ -27,6 +27,14 @@ var app = (function () {
         idPelicula: null
     }
 
+	var sedes = {
+		nombreSede: null,
+		ciudadSede: null,
+		ubicacionSede: null,
+		horarioSede: null,
+		idSede: null
+	}
+	
     var usuario;
     var alias;
     var password;
@@ -122,7 +130,31 @@ var app = (function () {
                 "<td>" +
                 cinemas.nameCinem +
                 "</td> " +
-                "<td><form><a href='sala.html?id=" + cinemas.idCinem + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sedes.html?id=" + cinemas.idCinem + "?idP=" + peliculas.idPeliculas + "'>Seleccionar</a></></td>" +
+                "</tr>"
+            )
+        });
+    }
+	
+	    var createTableSede = function(list) {
+        list = mapSede(list);
+        console.info(list);
+        $("#tableSede > tbody").empty();
+        list.map(function (sedes) {
+            $("#tableSede > tbody").append(
+                "<tr> <td>" +
+                sedes.nombreSede +
+                "</td>" +
+                "<td>" +
+                sedes.ciudadSede +
+                "</td> " +
+				"<td> " +
+				sedes.ubicacionSede +
+				"</td> " +
+				"<td> " +
+				sedes.horario +
+				"</td> " +
+                "<td><form><a href='sedes.html?id=" + sedes.idSede + "?idP=" + peliculas.idPelicula + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
@@ -145,6 +177,21 @@ var app = (function () {
         });
 
     }
+	
+	var getSedeById = function () {
+		console.info("Empezamos");
+		const valores = window.location.search;
+		console.inf("Acá vamos");
+		const urlParams = new URLSearchParams(valores);
+		console.inf("Todo sesi por ahora");
+		var id = urlParams.get('id');
+		console.info(id);
+		$.get("sede/sedes/" + id, function(sedota){
+			sedes = sedota;
+			console.info(sedota);
+			createTableSede(sedota);
+		});
+	}
 
     var getCinemas = function () {
         const valores = window.location.search;
@@ -212,6 +259,20 @@ var app = (function () {
                 nameCinem: cinemas["nombre"],
                 logoCinem: cinemas["logo"],
                 idCinem: cinemas["id"]
+            };
+        })
+    }
+	
+	var mapSede = function (list) {
+        return mapSede = list.map(function (sedes) {
+            console.info(sedes);
+            console.info("hola");
+            console.info(sedes["nombre"]);
+            return {
+                nombreSede: sedes["nombre"],
+                ciudadSede: sedes["ciudad"],
+                ubicacionSede: sedes["ubicacion"],
+				horarioSede: sedes["horario"]
             };
         })
     }
