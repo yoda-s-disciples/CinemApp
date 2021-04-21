@@ -1,7 +1,6 @@
 package edu.eci.arsw.cinemApp.persistence.impl;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.cinemApp.DB.CinemAppDB;

@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import edu.eci.arsw.cinemApp.exceptions.UsuarioException;
 import edu.eci.arsw.cinemApp.model.Cinema;
 import edu.eci.arsw.cinemApp.model.Pelicula;
+import edu.eci.arsw.cinemApp.model.Sala;
+import edu.eci.arsw.cinemApp.model.Sede;
 import edu.eci.arsw.cinemApp.model.Usuario;
 
 public class CinemAppDB {
@@ -190,8 +192,6 @@ public class CinemAppDB {
 	}
 	
 	public List<Cinema> getCinemasById(String idPelicula) {
-		System.out.println("Entro Db");
-		System.out.println(idPelicula);
 		List<Cinema> cinemas = new ArrayList<Cinema>();
 		PreparedStatement pstmt = null;
 		if (connection == null) {
@@ -202,33 +202,76 @@ public class CinemAppDB {
 
 			}
 		}try {
-			System.out.println("Entro Db try");
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
-			
-			//pstmt = connection.prepareStatement("Select nombre, logo from cinema, pelicula_cinema where idpelicula = '02' and  idcinema=id;", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			//"SELECT tm.tipo,  m.cantidad,  m.fecha FROM movimientos AS m INNER JOIN tipos_movimiento AS tm ON tm.id=m.tipo WHERE m.codigo=?";
 			pstmt = connection.prepareStatement("Select c.nombre, c.id, c.logo from cinema as c INNER JOIN pelicula_cinema as pc ON c.id=pc.idcinema where pc.idpelicula = ?");
-			System.out.println(pstmt.getResultSet());
-			System.out.println("pstmt "+pstmt);
 			pstmt.setString(1, idPelicula);
-			System.out.println("CinemaID" + idPelicula);
 			ResultSet resultSet = pstmt.executeQuery();
 			Cinema cinema = null;
-			System.out.println("rs "+resultSet.getFetchSize());
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString("nombre"));
-				System.out.println(resultSet.getString("id"));
-				System.out.println(resultSet.getString("logo"));
-				System.out.println("while");
 				cinema = new Cinema(resultSet.getString("nombre"), resultSet.getString("id"), resultSet.getString("logo"));
 				cinemas.add(cinema);
-				System.out.println(cinema.getNombre());
 			}
-			System.out.println(cinema.getNombre());
 			resultSet.close();
 			pstmt.close();
 			return cinemas;
+		}catch (Exception e) {
+		}
+		return null;
+	}
+
+	public List<Sede> getSede() {
+		List<Sede> sedes = new ArrayList<Sede>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("select * from sede;");
+			ResultSet resultSet = pstmt.executeQuery();
+			Sede sede = null;
+			while (resultSet.next()) {
+				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"));
+				sedes.add(sede);
+			}
+			resultSet.close();
+			pstmt.close();
+			return sedes;
+		}catch (Exception e) {
+		}
+		return null;
+	}
+
+	public List<Sede> getSedeByID(String id) {
+		List<Sede> sedes = new ArrayList<Sede>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("Select c.nombre, c.ciudad, c.ubicacion, c.horario, c.id, c.idcinema from sede as c INNER JOIN pelicula_sede as pc ON c.id=pc.idsede where pc.idpelicula = ?");
+			pstmt.setString(1, id);
+			ResultSet resultSet = pstmt.executeQuery();
+			Sede sede = null;
+			while (resultSet.next()) {
+				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"));
+				sedes.add(sede);
+			}
+			resultSet.close();
+			pstmt.close();
+			return sedes;
 		}catch (Exception e) {
 		}
 		return null;
