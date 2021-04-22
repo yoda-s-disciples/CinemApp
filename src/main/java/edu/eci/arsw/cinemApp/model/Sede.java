@@ -9,7 +9,7 @@ public class Sede {
 	public String ubicacion;
 	public String horario;
 	public String id;
-	public List salas;
+	//public String idPelicula;
 	
 	public Sede(String nombre, String ciudad, String ubicacion, String horario, String id) {
 		
@@ -51,14 +51,6 @@ public class Sede {
 
 	public void setHorario(String horario) {
 		this.horario = horario;
-	}
-
-	public List getSalas() {
-		return salas;
-	}
-
-	public void setSalas(List salas) {
-		this.salas = salas;
 	}
 
 	public String getId() {

@@ -32,10 +32,8 @@ public class CinemaController {
 	@RequestMapping(path = "/Cines/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCinemasById(@PathVariable ("id") String id){
 		try {
-			System.out.println("Controller");
 			return new ResponseEntity<>(cinemaServices.getCinemasById(id), HttpStatus.OK);
 		}catch(PeliculaException e) {
-			System.out.println("Else");
 			e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}

@@ -21,7 +21,6 @@ public class CinemaPersistencimpl implements CinemaPersistence{
 	
 	@Override
 	public List<Cinema> getCinemasById(String id) {
-		System.out.println("Persistencia");
 		return cineMapDB.getCinemasById(id);
 	}
 	

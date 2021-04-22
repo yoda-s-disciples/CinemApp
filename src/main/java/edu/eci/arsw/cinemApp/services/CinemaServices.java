@@ -22,7 +22,6 @@ public class CinemaServices {
 
 	
 	public List<Cinema> getCinemasById(String id) throws PeliculaException{
-		System.out.println("services");
 		return cinemaPersistence.getCinemasById(id);
 	}
 

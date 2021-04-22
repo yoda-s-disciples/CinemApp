@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.eci.arsw.cinemApp.exceptions.PeliculaException;
 import edu.eci.arsw.cinemApp.exceptions.SedeException;
 import edu.eci.arsw.cinemApp.services.SedeServices;
 
@@ -32,6 +31,7 @@ public class SedeController {
 	@RequestMapping(path = "/sedes/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getSedeByID(@PathVariable("id") String id){
 		try {
+			System.out.println("Controller");
 			return new ResponseEntity<>(sedeServices.getSedeByID(id), HttpStatus.OK);
 		}catch(SedeException e) {
 			e.printStackTrace();
