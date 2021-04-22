@@ -130,7 +130,7 @@ var app = (function () {
                 "<td>" +
                 cinemas.nameCinem +
                 "</td> " +
-                "<td><form><a href='sedes.html?id=" + cinemas.idCinem + "?idP=" + peliculas.idPeliculas + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sedes.html?id=" + cinemas.idCinem + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
@@ -154,7 +154,7 @@ var app = (function () {
 				"<td> " +
 				sedes.horario +
 				"</td> " +
-                "<td><form><a href='sedes.html?id=" + sedes.idSede + "?idP=" + peliculas.idPelicula + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sedes.html?id=" + sedes.idSede + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
@@ -181,9 +181,9 @@ var app = (function () {
 	var getSedeById = function () {
 		console.info("Empezamos");
 		const valores = window.location.search;
-		console.inf("Acá vamos");
+		console.info("Acá vamos");
 		const urlParams = new URLSearchParams(valores);
-		console.inf("Todo sesi por ahora");
+		console.info("Todo sesi por ahora");
 		var id = urlParams.get('id');
 		console.info(id);
 		$.get("sede/sedes/" + id, function(sedota){
@@ -284,9 +284,11 @@ var app = (function () {
         createTable: createTable,
         abrirPelicula: abrirPelicula,
         getPeliculaByID: getPeliculaByID,
+		getSedeById: getSedeById,
         createTableByID: createTableByID,
         getCinemas: getCinemas,
-        createTableCinema: createTableCinema
+        createTableCinema: createTableCinema,
+		createTableSede: createTableSede
     }
 
 })();
