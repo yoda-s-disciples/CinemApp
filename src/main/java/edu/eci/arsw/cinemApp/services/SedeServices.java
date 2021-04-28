@@ -22,7 +22,6 @@ public class SedeServices {
 	}
 
 	public List<Sede> getSedeByID(String id) throws SedeException{
-		System.out.println("Service");
 		return sedePersistence.getSedeByID(id);
 	}
 

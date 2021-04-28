@@ -9,15 +9,16 @@ public class Sede {
 	public String ubicacion;
 	public String horario;
 	public String id;
-	//public String idPelicula;
+	public String idCinema;
 	
-	public Sede(String nombre, String ciudad, String ubicacion, String horario, String id) {
+	public Sede(String nombre, String ciudad, String ubicacion, String horario, String id, String idCinema) {
 		
 		this.nombre = nombre;
 		this.ciudad = ciudad;
 		this.ubicacion = ubicacion;
 		this.horario = horario;
 		this.id = id;
+		this.idCinema = idCinema;
 		
 	}
 
@@ -59,6 +60,14 @@ public class Sede {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getIdCinema() {
+		return idCinema;
+	}
+
+	public void setIdCinema(String idCinema) {
+		this.idCinema = idCinema;
 	}
 	
 }

@@ -151,7 +151,6 @@ public class CinemAppDB {
 						resultSet.getString("genero"), resultSet.getString("id"), resultSet.getString("poster"),
 						resultSet.getString("director"));
 				peliculas.add(pelicula);
-				System.out.println(pelicula.getNombre());
 			}
 			resultSet.close();
 			pstmt.close();
@@ -219,6 +218,8 @@ public class CinemAppDB {
 		}
 		return null;
 	}
+	
+	/* SEDES */
 
 	public List<Sede> getSede() {
 		List<Sede> sedes = new ArrayList<Sede>();
@@ -237,7 +238,7 @@ public class CinemAppDB {
 			ResultSet resultSet = pstmt.executeQuery();
 			Sede sede = null;
 			while (resultSet.next()) {
-				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"));
+				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"), resultSet.getString("idCinema"));
 				sedes.add(sede);
 			}
 			resultSet.close();
@@ -249,7 +250,6 @@ public class CinemAppDB {
 	}
 
 	public List<Sede> getSedeByID(String id) {
-		System.out.println("BD");
 		List<Sede> sedes = new ArrayList<Sede>();
 		PreparedStatement pstmt = null;
 		if (connection == null) {
@@ -260,17 +260,14 @@ public class CinemAppDB {
 
 			}
 		}try {
-			System.out.println("try");
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
 			pstmt = connection.prepareStatement("Select c.nombre, c.ciudad, c.ubicacion, c.horario, c.id, c.idcinema from sede as c INNER JOIN pelicula_sede as pc ON c.id=pc.idsede where pc.idpelicula = ?");
 			pstmt.setString(1, id);
 			ResultSet resultSet = pstmt.executeQuery();
 			Sede sede = null;
-			System.out.println("hello");
 			while (resultSet.next()) {
-				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"));
-				//System.out.println(sede.getNombre());
+				sede = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"), resultSet.getString("idCinema"));
 				sedes.add(sede);
 			}
 			resultSet.close();

@@ -31,7 +31,6 @@ public class SedeController {
 	@RequestMapping(path = "/sedes/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getSedeByID(@PathVariable("id") String id){
 		try {
-			System.out.println("Controller");
 			return new ResponseEntity<>(sedeServices.getSedeByID(id), HttpStatus.OK);
 		}catch(SedeException e) {
 			e.printStackTrace();

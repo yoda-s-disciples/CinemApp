@@ -32,7 +32,10 @@ var app = (function () {
         ciudadSede: null,
         ubicacionSede: null,
         horarioSede: null,
-        idSede: null
+        idSede: null,
+        idCinema: null,
+        nombreCinemaSede: null,
+        logoCinemaSede: null
     }
 
     var usuario;
@@ -52,6 +55,11 @@ var app = (function () {
             data: JSON.stringify(user),
             contentType: 'application/json',
             success: function () {
+                Swal.fire(
+                    'Good job!',
+                    'Perfecto',
+                    'success'
+                );
                 location.href = "home.html";
             }
         });
@@ -72,13 +80,30 @@ var app = (function () {
                     data: JSON.stringify(user),
                     contentType: "application/json",
                     success: function () {
+                        Swal.fire(
+                            'Good job!',
+                            'Tu usuario ha sido Registrado!',
+                            'success'
+                        );
                         location.href = "login.html";
                     }
                 });
             } else {
-                alert("Incorreto!");
-            }
-        }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'A ocurrido un error, vuelve a intentarlo!',
+                    footer: '<a href>Vuelve a intentarlo!</a>'
+                })
+            };
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'A ocurrido un error, vuelve a intentarlo!',
+                footer: '<a href>Vuelve a intentarlo!</a>'
+            })
+        };
 
     }
 
@@ -118,7 +143,6 @@ var app = (function () {
     }
 
     var createTableCinema = function (list) {
-        console.info("cinemas: "+list)
         list = mapCinema(list);
         $("#tableCinema > tbody").empty();
         list.map(function (cinemas) {
@@ -137,11 +161,11 @@ var app = (function () {
     var createTableSede = function (list) {
         list = mapSede(list);
         $("#tableSede > tbody").empty();
-        list.map(function (sedes, peliculas) {
+        list.map(function (sedes) {
             $("#tableSede > tbody").append(
                 "<tr> <td>" +
                 sedes.nombreSede +
-                "</td>" +
+                "</td> " +
                 "<td>" +
                 sedes.ciudadSede +
                 "</td> " +
@@ -177,7 +201,6 @@ var app = (function () {
     var getSedeById = function (id) {
         $.get("sede/sedes/" + id, function (sedota) {
             sedes = sedota;
-            console.info(sedota);
             createTableSede(sedota);
         });
     }
@@ -185,11 +208,8 @@ var app = (function () {
     var getCinemas = function (id) {
         const valores = window.location.search;
         const urlParams = new URLSearchParams(valores);
-        //var id = urlParams.get('id');
-        console.info("cinema " + id);
         $.get("cinema/Cines/" + id, function (cinem) {
             cinemas = cinem;
-            console.info(cinem);
             createTableCinema(cinem);
         });
     }
@@ -218,7 +238,7 @@ var app = (function () {
                 "</tr>"
             )
         })
-            //getCinemas();
+        //getCinemas();
     }
 
     var map = function (list) {
@@ -249,12 +269,16 @@ var app = (function () {
 
     var mapSede = function (list) {
         return mapSede = list.map(function (sedes) {
+            console.info(sedes);
             return {
                 nombreSede: sedes["nombre"],
                 ciudadSede: sedes["ciudad"],
                 ubicacionSede: sedes["ubicacion"],
                 horarioSede: sedes["horario"],
                 idSede: sedes["id"],
+                idCinema: sedes["idCinema"],
+                nameCinema: sedes["nombreCinemaSede"],
+                logoCinema:sedes["logoCinemaSede"]
             };
         })
     }
