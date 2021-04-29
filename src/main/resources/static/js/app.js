@@ -175,7 +175,7 @@ var app = (function () {
                 "<td> " +
                 sedes.horarioSede +
                 "</td> " +
-                "<td><form><a href='sedes.html?id=" + sedes.idSede + "?idP=" + peliculas.idPelicula + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sala.html?id=" + sedes.idSede + "?idP=" + peliculas.idPelicula + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
