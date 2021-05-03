@@ -33,9 +33,7 @@ var app = (function () {
         ubicacionSede: null,
         horarioSede: null,
         idSede: null,
-        idCinema: null,
-        nombreCinemaSede: null,
-        logoCinemaSede: null
+        idCinema: null
     }
 
     var usuario;
@@ -142,78 +140,6 @@ var app = (function () {
         });
     }
 
-    var createTableCinema = function (list) {
-        list = mapCinema(list);
-        $("#tableCinema > tbody").empty();
-        list.map(function (cinemas) {
-            $("#tableCinema > tbody").append(
-                "<tr> <td>" +
-                "<img src='" + cinemas.logoCinem + "' width='150' height='150' >" +
-                "</td>" +
-                "<td>" +
-                cinemas.nameCinem +
-                "</td> " +
-                "</tr>"
-            )
-        });
-    }
-
-    var createTableSede = function (list) {
-        list = mapSede(list);
-        $("#tableSede > tbody").empty();
-        list.map(function (sedes) {
-            $("#tableSede > tbody").append(
-                "<tr> <td>" +
-                sedes.nombreSede +
-                "</td> " +
-                "<td>" +
-                sedes.ciudadSede +
-                "</td> " +
-                "<td> " +
-                sedes.ubicacionSede +
-                "</td> " +
-                "<td> " +
-                sedes.horarioSede +
-                "</td> " +
-                "<td><form><a href='sala.html?id=" + sedes.idSede + "?idP=" + peliculas.idPelicula + "'>Seleccionar</a></></td>" +
-                "</tr>"
-            )
-        });
-    }
-
-    var abrirPelicula = function (peliculaID) {
-        getPeliculaByID(peliculaID);
-    }
-
-    var getPeliculaByID = function () {
-        const valores = window.location.search;
-        const urlParams = new URLSearchParams(valores);
-        var id = urlParams.get('id');
-        $.get("pelicula/Movies/" + id, function (peliculon) {
-            peliculas = peliculon;
-            createTableByID(peliculon);
-            getCinemas(id);
-            getSedeById(id);
-        });
-
-    }
-
-    var getSedeById = function (id) {
-        $.get("sede/sedes/" + id, function (sedota) {
-            sedes = sedota;
-            createTableSede(sedota);
-        });
-    }
-
-    var getCinemas = function (id) {
-        const valores = window.location.search;
-        const urlParams = new URLSearchParams(valores);
-        $.get("cinema/Cines/" + id, function (cinem) {
-            cinemas = cinem;
-            createTableCinema(cinem);
-        });
-    }
-
     var createTableByID = function (list) {
         list = map(list);
         $("#tablePelicula > tbody").empty();
@@ -237,8 +163,92 @@ var app = (function () {
                 "</td> " +
                 "</tr>"
             )
-        })
-        //getCinemas();
+        });
+    }
+
+    var createTableCinema = function (list) {
+        list = mapCinema(list);
+        $("#tableCinema > tbody").empty();
+        list.map(function (cinemas) {
+            $("#tableCinema > tbody").append(
+                "<tr> <td>" +
+                "<img src='" + cinemas.logoCinem + "' width='150' height='150' >" +
+                "</td>" +
+                "<td>" +
+                cinemas.nameCinem +
+                "</td> " +
+                "</tr>"
+            )
+        });
+    }
+
+    var createTableSede = function (list, id) {
+        
+        list = mapSede(list);
+        console.info(id);
+        $("#tableSede > tbody").empty();
+        list.map(function (sedes) {
+            $("#tableSede > tbody").append(
+                "<tr> <td>" +
+                sedes.nombreSede +
+                "</td> " +
+                "<td>" +
+                sedes.ciudadSede +
+                "</td> " +
+                "<td> " +
+                sedes.ubicacionSede +
+                "</td> " +
+                "<td> " +
+                sedes.horarioSede +
+                "</td> " +
+                "<td><form><a href='sala.html?sede=" + sedes.idSede + "&pelicula=" + id + "&cinema=" + sedes.idCinema + "'>Seleccionar</a></></td>" +
+                "</tr>"
+            )
+        });
+    }
+
+    /*var abrirPelicula = function (peliculaID) {
+        getPeliculaByID(peliculaID);
+    }*/
+
+    var getPeliculaByID = function () {
+        const valores = window.location.search;
+        const urlParams = new URLSearchParams(valores);
+        var id = urlParams.get('id');
+        $.get("pelicula/Movies/" + id, function (peliculon) {
+            peliculas = peliculon;
+            createTableByID(peliculon);
+            getCinemas(id);
+            getSedeById(id);
+        });
+
+    }
+
+    var getSedeById = function (id) {
+        $.get("sede/sedes/" + id, function (sedota) {
+            sedes = sedota;
+            createTableSede(sedota, id);
+        });
+    }
+
+    var getCinemas = function (id) {
+        const valores = window.location.search;
+        const urlParams = new URLSearchParams(valores);
+        $.get("cinema/Cines/" + id, function (cinem) {
+            cinemas = cinem;
+            createTableCinema(cinem);
+        });
+    }
+
+    var sala = function (){
+        const valores = window.location.search;
+        const urlParams = new URLSearchParams(valores);
+        var sede = urlParams.get('sede');
+        var pelicula = urlParams.get('pelicula');
+        var cinema = urlParams.get('cinema');
+        console.info(sede);
+        console.info(pelicula);
+        console.info(cinema);
     }
 
     var map = function (list) {
@@ -269,16 +279,13 @@ var app = (function () {
 
     var mapSede = function (list) {
         return mapSede = list.map(function (sedes) {
-            console.info(sedes);
             return {
                 nombreSede: sedes["nombre"],
                 ciudadSede: sedes["ciudad"],
                 ubicacionSede: sedes["ubicacion"],
                 horarioSede: sedes["horario"],
                 idSede: sedes["id"],
-                idCinema: sedes["idCinema"],
-                nameCinema: sedes["nombreCinemaSede"],
-                logoCinema:sedes["logoCinemaSede"]
+                idCinema: sedes["idCinema"]
             };
         })
     }
@@ -288,13 +295,14 @@ var app = (function () {
         crear: crear,
         getPelicula: getPelicula,
         createTable: createTable,
-        abrirPelicula: abrirPelicula,
+        //abrirPelicula: abrirPelicula,
         getPeliculaByID: getPeliculaByID,
         createTableByID: createTableByID,
         getCinemas: getCinemas,
         createTableCinema: createTableCinema,
         createTableSede: createTableSede,
-        getSedeById: getSedeById
+        getSedeById: getSedeById,
+        sala: sala
     }
 
 })();
