@@ -21,8 +21,8 @@ public class SedeServices {
 		return sedePersistence.getSede();
 	}
 
-	public List<Sede> getSedeByID(String id) throws SedeException{
-		return sedePersistence.getSedeByID(id);
+	public List<Sede> getSedeByID(String idPelicula, String idCinema) throws SedeException{
+		return sedePersistence.getSedeByID(idPelicula, idCinema);
 	}
 
 }

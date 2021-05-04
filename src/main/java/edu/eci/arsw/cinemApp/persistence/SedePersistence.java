@@ -9,6 +9,6 @@ public interface SedePersistence {
 
 	public List<Sede> getSede() throws SedeException;
 
-	public List<Sede> getSedeByID(String id) throws SedeException;
+	public List<Sede> getSedeByID(String idPelicula, String idCinema) throws SedeException;
 
 }

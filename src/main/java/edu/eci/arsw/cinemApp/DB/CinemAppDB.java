@@ -249,7 +249,7 @@ public class CinemAppDB {
 		return null;
 	}
 
-	public List<Sede> getSedeByID(String id) {
+	public List<Sede> getSedeByID(String idPelicula, String idCinema) {
 		List<Sede> sedes = new ArrayList<Sede>();
 		PreparedStatement pstmt = null;
 		if (connection == null) {
@@ -262,8 +262,8 @@ public class CinemAppDB {
 		}try {
 			Class.forName("org.postgresql.Driver");
 			connection.setAutoCommit(false);
-			pstmt = connection.prepareStatement("Select c.nombre, c.ciudad, c.ubicacion, c.horario, c.id, c.idcinema from sede as c INNER JOIN pelicula_sede as pc ON c.id=pc.idsede where pc.idpelicula = ?");
-			pstmt.setString(1, id);
+			
+			pstmt = connection.prepareStatement("select sede.nombre, sede.ciudad, sede.ubicacion, sede.horario, sede.id, sede.idcinema from sede, pelicula_sede where sede.id = pelicula_sede.idsede and sede.idcinema = '"+ idCinema +"' and pelicula_sede.idpelicula = '"+ idPelicula + "';");
 			ResultSet resultSet = pstmt.executeQuery();
 			Sede sede = null;
 			while (resultSet.next()) {

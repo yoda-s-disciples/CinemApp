@@ -134,7 +134,7 @@ var app = (function () {
                 "<td>" +
                 peliculas.directorPeliculas +
                 "</td> " +
-                "<td><form><a href='cinema.html?id=" + peliculas.idPeliculas + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='cinema.html?pelicula=" + peliculas.idPeliculas + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
@@ -166,26 +166,26 @@ var app = (function () {
         });
     }
 
-    var createTableCinema = function (list) {
+    var createTableCinema = function (list, idPelicula) {
         list = mapCinema(list);
         $("#tableCinema > tbody").empty();
         list.map(function (cinemas) {
             $("#tableCinema > tbody").append(
                 "<tr> <td>" +
-                "<img src='" + cinemas.logoCinem + "' width='150' height='150' >" +
+                "<img src='" + cinemas.logoCinema + "' width='150' height='150' >" +
                 "</td>" +
                 "<td>" +
-                cinemas.nameCinem +
+                cinemas.nameCinema +
                 "</td> " +
+                "<td><form><a href='sedes.html?pelicula=" + idPelicula + "&cinema=" + cinemas.idCinema + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
+        
     }
 
-    var createTableSede = function (list, id) {
-        
+    var createTableSede = function (list, idPelicula, idCinema) {
         list = mapSede(list);
-        console.info(id);
         $("#tableSede > tbody").empty();
         list.map(function (sedes) {
             $("#tableSede > tbody").append(
@@ -201,42 +201,43 @@ var app = (function () {
                 "<td> " +
                 sedes.horarioSede +
                 "</td> " +
-                "<td><form><a href='sala.html?sede=" + sedes.idSede + "&pelicula=" + id + "&cinema=" + sedes.idCinema + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sala.html?sede=" + sedes.idSede + "&pelicula=" + idPelicula + "&cinema=" + idCinema + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
     }
 
-    /*var abrirPelicula = function (peliculaID) {
-        getPeliculaByID(peliculaID);
-    }*/
-
     var getPeliculaByID = function () {
         const valores = window.location.search;
         const urlParams = new URLSearchParams(valores);
-        var id = urlParams.get('id');
-        $.get("pelicula/Movies/" + id, function (peliculon) {
+        var idPelicula = urlParams.get('pelicula');
+        $.get("pelicula/Movies/" + idPelicula, function (peliculon) {
             peliculas = peliculon;
-            createTableByID(peliculon);
-            getCinemas(id);
-            getSedeById(id);
+            createTableByID(peliculon, idPelicula);
+            //getCinemas(idPelicula);
+            //getSedeById(idPelicula);
         });
 
     }
 
-    var getSedeById = function (id) {
-        $.get("sede/sedes/" + id, function (sedota) {
-            sedes = sedota;
-            createTableSede(sedota, id);
-        });
-    }
-
-    var getCinemas = function (id) {
+    var getCinemas = function () {
         const valores = window.location.search;
         const urlParams = new URLSearchParams(valores);
-        $.get("cinema/Cines/" + id, function (cinem) {
+        var idPelicula = urlParams.get('pelicula');
+        $.get("cinema/Cines/" + idPelicula, function (cinem) {
             cinemas = cinem;
-            createTableCinema(cinem);
+            createTableCinema(cinem, idPelicula);
+        });
+    }
+
+    var getSedeById = function () {
+        const valores = window.location.search;
+        const urlParams = new URLSearchParams(valores);
+        var idPelicula = urlParams.get('pelicula');
+        var idCinema = urlParams.get('cinema');
+        $.get("sede/sedes/" + idPelicula + "/" + idCinema, function (sedota) {
+            sedes = sedota;
+            createTableSede(sedota, idPelicula, idCinema);
         });
     }
 
@@ -270,9 +271,9 @@ var app = (function () {
     var mapCinema = function (list) {
         return mapCine = list.map(function (cinemas) {
             return {
-                nameCinem: cinemas["nombre"],
-                logoCinem: cinemas["logo"],
-                idCinem: cinemas["id"]
+                nameCinema: cinemas["nombre"],
+                logoCinema: cinemas["logo"],
+                idCinema: cinemas["id"]
             };
         })
     }
@@ -295,7 +296,6 @@ var app = (function () {
         crear: crear,
         getPelicula: getPelicula,
         createTable: createTable,
-        //abrirPelicula: abrirPelicula,
         getPeliculaByID: getPeliculaByID,
         createTableByID: createTableByID,
         getCinemas: getCinemas,

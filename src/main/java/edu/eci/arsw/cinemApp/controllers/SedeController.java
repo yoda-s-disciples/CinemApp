@@ -28,10 +28,10 @@ public class SedeController {
 		}
 	}
 	
-	@RequestMapping(path = "/sedes/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> getSedeByID(@PathVariable("id") String id){
+	@RequestMapping(path = "/sedes/{idPelicula}/{idCinema}", method = RequestMethod.GET)
+	public ResponseEntity<?> getSedeByID(@PathVariable("idPelicula") String idPelicula, @PathVariable("idCinema") String idCinema){
 		try {
-			return new ResponseEntity<>(sedeServices.getSedeByID(id), HttpStatus.OK);
+			return new ResponseEntity<>(sedeServices.getSedeByID(idPelicula, idCinema), HttpStatus.OK);
 		}catch(SedeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);

@@ -21,8 +21,8 @@ public class SedePersistenceimpl implements SedePersistence{
 	}
 
 	@Override
-	public List<Sede> getSedeByID(String id) throws SedeException {
-		return cineMapDB.getSedeByID(id);
+	public List<Sede> getSedeByID(String idPelicula, String idCinema) throws SedeException {
+		return cineMapDB.getSedeByID(idPelicula, idCinema);
 	}
 
 }
