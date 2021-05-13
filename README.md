@@ -106,7 +106,7 @@ Tickets
 ```
 
 <p align="center"> 
-  <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Tickes.PNG?raw=true">
+  <img src="https://github.com/yoda-s-disciples/CinemApp/blob/master/img/Tickets.PNG?raw=true">
 </p>
 
 ```
