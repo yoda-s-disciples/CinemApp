@@ -181,7 +181,7 @@ var app = (function () {
                 "</tr>"
             )
         });
-        
+
     }
 
     var createTableSede = function (list, idPelicula, idCinema) {
@@ -201,7 +201,7 @@ var app = (function () {
                 "<td> " +
                 sedes.horarioSede +
                 "</td> " +
-                "<td><form><a href='sala.html?sede=" + sedes.idSede + "&pelicula=" + idPelicula + "&cinema=" + idCinema + "'>Seleccionar</a></></td>" +
+                "<td><form><a href='sala.html?pelicula=" + idPelicula + "&cinema=" + idCinema + "&sede=" + sedes.idSede + "'>Seleccionar</a></></td>" +
                 "</tr>"
             )
         });
@@ -241,7 +241,7 @@ var app = (function () {
         });
     }
 
-    var sala = function (){
+    var sala = function () {
         const valores = window.location.search;
         const urlParams = new URLSearchParams(valores);
         var sede = urlParams.get('sede');
@@ -291,6 +291,35 @@ var app = (function () {
         })
     }
 
+    var comprar = function () {
+        if ($("input:checked").length == ($("#Numseats").val())) {
+            $(".seatStructure *").prop("disabled", true);
+
+            var allSeatsVals = [];
+
+            //Storing in Array
+            $('#seatsBlock :checked').each(function () {
+                allSeatsVals.push($(this).val());
+            });
+
+            //Displaying 
+            $('#nameDisplay').val(allNameVals);
+            $('#NumberDisplay').val(allNumberVals);
+            $('#seatsDisplay').val(allSeatsVals);
+            $(".page").attr("hidden", false);
+
+        }
+        else {
+            Swal.fire("Por favor seleccione:  " + ($("#seatsDisplay").val()) + " asientos")
+            console.info("entro");
+            console.info('#nameDisplay');
+            console.info('#NumberDisplay');
+            console.info('#seatsDisplay');
+            console.info('#seatsBlock :checked');
+            console.info(allSeatsVals);
+        }
+    }
+
     return {
         ingresar: ingresar,
         crear: crear,
@@ -302,7 +331,8 @@ var app = (function () {
         createTableCinema: createTableCinema,
         createTableSede: createTableSede,
         getSedeById: getSedeById,
-        sala: sala
+        sala: sala,
+        comprar: comprar
     }
 
 })();
