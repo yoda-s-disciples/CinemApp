@@ -31,11 +31,20 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioServices usuarioServices; 
 	
-	@RequestMapping(path = "/Users", method = RequestMethod.GET)
-	public ResponseEntity<?> getUsers(@PathVariable String userEmail){
+	@RequestMapping(path = "/User", method = RequestMethod.GET)
+	public ResponseEntity<?> getUser(){
 		try {
-			//Usuario user = (Usuario) usuarioServices.getUsers(userEmail);
-			return new ResponseEntity<>((Usuario) usuarioServices.getUsers(userEmail), HttpStatus.OK);
+			return new ResponseEntity<>(usuarioServices.getUser(), HttpStatus.OK);
+		}catch(UsuarioException e) {
+			e.printStackTrace();
+            return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(path = "/correo/{correo}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUserByCorreo(@PathVariable("correo") String correo){
+		try {
+			return new ResponseEntity<>(usuarioServices.getUserByCorreo(correo), HttpStatus.OK);
 		}catch(UsuarioException e) {
 			e.printStackTrace();
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);

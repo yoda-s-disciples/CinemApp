@@ -23,5 +23,10 @@ public class CinemaPersistencimpl implements CinemaPersistence{
 	public List<Cinema> getCinemasById(String id) {
 		return cineMapDB.getCinemasById(id);
 	}
+
+	@Override
+	public List<Cinema> getCinemasReserva(String cinema, String pelicula) {
+		return cineMapDB.getCinemasReserva(cinema, pelicula);
+	}
 	
 }

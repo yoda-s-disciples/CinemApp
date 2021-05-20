@@ -25,4 +25,9 @@ public class CinemaServices {
 		return cinemaPersistence.getCinemasById(id);
 	}
 
+
+	public List<Cinema> getCinemasReserva(String cinema, String pelicula) throws PeliculaException{
+		return cinemaPersistence.getCinemasReserva(cinema, pelicula);
+	}
+
 }

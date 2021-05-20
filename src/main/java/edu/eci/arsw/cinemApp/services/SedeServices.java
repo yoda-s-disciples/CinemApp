@@ -25,4 +25,20 @@ public class SedeServices {
 		return sedePersistence.getSedeByID(idPelicula, idCinema);
 	}
 
+	public void comprarAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException{
+		sedePersistence.comprarAsiento(pelicula, cinema, sede, username, asientos);
+	}
+
+	public List<Sede> getSedeReserva(String pelicula, String cinema, String sede) throws SedeException{
+		return sedePersistence.getSedeReserva(pelicula, cinema, sede);
+	}
+
+	public Object getReservasByUser(String user) throws SedeException{
+		return sedePersistence.getReservasByUser(user);
+	}
+
+	public void deleteAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException{
+		sedePersistence.deleteAsiento(pelicula, cinema, sede, username, asientos);
+	}
+
 }

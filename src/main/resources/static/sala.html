@@ -11,7 +11,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
 		rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
-	<link href="css/sala.css" />
+	<link href="css/sala.css" type="text/css" rel="stylesheet" />
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -27,7 +27,7 @@
 
 <body onload="app.sala()">
 	<br>
-	<div align="center">
+	<div align="center" class="seatStructure">
 		<br>
 		<img src="img/cinemapp.png" width="20%" height="30%" />
 		<br>
@@ -38,12 +38,7 @@
 				<td colspan="14">
 					<div class="screen">PANTALLA</div>
 				</td>
-				<td rowspan="20">
-					<div class="smallBox greenBox">Asiento Seleccionado</div> <br />
-					<div class="smallBox emptyBox">Asiento Reservado</div><br />
-				</td>
-
-				<br />
+				<br>
 			</tr>
 
 			<tr>
@@ -238,7 +233,7 @@
 
 		</table>
 
-		<br/><button class="btn btn-primary" onclick="app.comprar()">Confirmar Selección</button>
+		<br /><button class="btn btn-primary" onclick="app.comprar()">Confirmar Selección</button>
 
 	</div>
 

@@ -25,4 +25,24 @@ public class SedePersistenceimpl implements SedePersistence{
 		return cineMapDB.getSedeByID(idPelicula, idCinema);
 	}
 
+	@Override
+	public void comprarAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException {
+		cineMapDB.comprarAsiento(pelicula, cinema, sede, username, asientos);
+	}
+
+	@Override
+	public List<Sede> getSedeReserva(String pelicula, String cinema, String sede) throws SedeException {
+		return cineMapDB.getSedeReserva(pelicula, cinema, sede);
+	}
+
+	@Override
+	public Object getReservasByUser(String user) {
+		return cineMapDB.getReservasByUser(user);
+	}
+
+	@Override
+	public void deleteAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException {
+		cineMapDB.deleteAsiento(pelicula, cinema, sede, username, asientos);
+	}
+
 }

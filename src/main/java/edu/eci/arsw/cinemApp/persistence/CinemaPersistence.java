@@ -9,5 +9,6 @@ public interface CinemaPersistence {
 	
 	public List<Cinema> getCinemas();
 	public List<Cinema> getCinemasById(String id);
+	public List<Cinema> getCinemasReserva(String cinema, String pelicula);
 
 }

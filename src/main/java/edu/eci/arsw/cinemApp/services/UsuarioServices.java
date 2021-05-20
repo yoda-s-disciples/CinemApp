@@ -20,6 +20,14 @@ public class UsuarioServices {
 	public Object getUsers(Object email) throws UsuarioException {
 		return usuarioPersistence.getUsers((String) email);
 	}
+
+	public Object getUser() throws UsuarioException{
+		return usuarioPersistence.getUser();
+	}
+
+	public Object getUserByCorreo(String correo) throws UsuarioException{
+		return usuarioPersistence.getUserByCorreo(correo);
+	}
 	
 	
 }

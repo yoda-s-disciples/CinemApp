@@ -38,4 +38,14 @@ public class CinemaController {
             return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@RequestMapping(path = "/reserva/{cinema}/{pelicula}", method = RequestMethod.GET)
+	public ResponseEntity<?> getCinemasReserva(@PathVariable ("cinema") String cinema, @PathVariable ("pelicula") String pelicula){
+		try {
+			return new ResponseEntity<>(cinemaServices.getCinemasReserva(cinema, pelicula), HttpStatus.OK);
+		}catch(PeliculaException e) {
+			e.printStackTrace();
+            return new ResponseEntity<>("404 NOT FOUND", HttpStatus.NOT_FOUND);
+		}
+	}
 }

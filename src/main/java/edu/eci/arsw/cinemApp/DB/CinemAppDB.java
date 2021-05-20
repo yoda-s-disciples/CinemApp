@@ -35,6 +35,74 @@ public class CinemAppDB {
 	}
 
 	/* USUARIO */
+	
+	public Object getUser() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("Select * from usuario;");
+			String string = null;
+			ResultSet resultSet = pstmt.executeQuery();
+			Usuario usuario = null;
+			while (resultSet.next()) {
+				string = resultSet.getString("password");
+				usuario = new Usuario(resultSet.getString("username"), resultSet.getString("nombre"),
+						resultSet.getString("apellido"), resultSet.getString("correo"),
+						resultSet.getString("password"));
+				usuarios.add(usuario);
+			}
+			resultSet.close();
+			pstmt.close();
+			return usuarios;
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+	
+	public Object getUserByCorreo(String correo) {
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}
+
+		try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("Select * from usuario where correo = ?");
+			pstmt.setString(1, correo);
+			String string = null;
+			ResultSet resultSet = pstmt.executeQuery();
+			Usuario usuario = null;
+			while (resultSet.next()) {
+				string = resultSet.getString("password");
+				usuario = new Usuario(resultSet.getString("username"), resultSet.getString("nombre"),
+						resultSet.getString("apellido"), resultSet.getString("correo"),
+						resultSet.getString("password"));
+			}
+			resultSet.close();
+			pstmt.close();
+			return usuario;
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
 
 	public void createNewUser(Usuario user) {
 		Usuario usuario = user;
@@ -56,6 +124,7 @@ public class CinemAppDB {
 			stmt.close();
 			connection.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -88,6 +157,7 @@ public class CinemAppDB {
 			pstmt.close();
 			return usuario;
 		} catch (Exception e) {
+			e.getMessage();
 		}
 		return null;
 
@@ -219,6 +289,34 @@ public class CinemAppDB {
 		return null;
 	}
 	
+	public List<Cinema> getCinemasReserva(String cinema, String pelicula) {
+		List<Cinema> cinemas = new ArrayList<Cinema>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			pstmt = connection.prepareStatement("Select c.nombre, c.id, c.logo from cinema as c INNER JOIN pelicula_cinema as pc ON c.id=pc.idcinema where pc.idcinema = '" + cinema + "' and pc.idpelicula = '" + pelicula + "';");
+			ResultSet resultSet = pstmt.executeQuery();
+			Cinema cine = null;
+			while (resultSet.next()) {
+				cine = new Cinema(resultSet.getString("nombre"), resultSet.getString("id"), resultSet.getString("logo"));
+				cinemas.add(cine);
+			}
+			resultSet.close();
+			pstmt.close();
+			return cinemas;
+		}catch (Exception e) {
+		}
+		return null;
+	}
+	
 	/* SEDES */
 
 	public List<Sede> getSede() {
@@ -276,6 +374,104 @@ public class CinemAppDB {
 		}catch (Exception e) {
 		}
 		return null;
+	}
+	
+	public List<Sede> getSedeReserva(String pelicula, String cinema, String sede) {
+		List<Sede> sedes = new ArrayList<Sede>();
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			
+			pstmt = connection.prepareStatement("select sede.nombre, sede.ciudad, sede.ubicacion, sede.horario, sede.id, sede.idcinema from sede, pelicula_sede where sede.id = pelicula_sede.idsede and sede.idcinema = '"+ cinema +"' and pelicula_sede.idpelicula = '"+ pelicula + "' and sede.id = '" + sede + "';");
+			ResultSet resultSet = pstmt.executeQuery();
+			Sede sedota = null;
+			while (resultSet.next()) {
+				sedota = new Sede(resultSet.getString("nombre"), resultSet.getString("ciudad"), resultSet.getString("ubicacion"), resultSet.getString("horario"), resultSet.getString("id"), resultSet.getString("idCinema"));
+				sedes.add(sedota);
+			}
+			resultSet.close();
+			pstmt.close();
+			return sedes;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void comprarAsiento(String pelicula, String cinema, String sede, String username, String asientos) {
+		Statement stmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			stmt = connection.createStatement();
+			String sql = "INSERT INTO reserva (pelicula, cinema, sede, usuario, asientos) VALUES ('" + pelicula + "','" + cinema + "','" + sede + "','" + username +"','" + asientos + "');";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Object getReservasByUser(String user) {
+		PreparedStatement pstmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+				connection.setAutoCommit(false);
+			} catch (Exception e) {
+
+			}
+		}try {
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			
+			pstmt = connection.prepareStatement("select * from reserva where usuario = '" + user + "';");
+			ResultSet resultSet = pstmt.executeQuery();
+			resultSet.close();
+			pstmt.close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void deleteAsiento(String pelicula, String cinema, String sede, String username, String asientos) {
+		Statement stmt = null;
+		if (connection == null) {
+			try {
+				connection = DriverManager.getConnection(database, usuarioDB, passwordDB);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}try {
+			System.out.print("entro DB");
+			Class.forName("org.postgresql.Driver");
+			connection.setAutoCommit(false);
+			stmt = connection.createStatement();
+			String sql = "delete from reserva where usuario = '" +username+ "' and pelicula = '"+ pelicula +"' and cinema = '"+ cinema +"' and sede = '" + sede + "' and asientos = '" + asientos + "';";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

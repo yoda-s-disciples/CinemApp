@@ -21,9 +21,19 @@ public class UsuarioPersistenceimpl implements UsuarioPersistence{
 		return cineMapDB.getUsers(email);
 	}
 
-	//@Override
+	@Override
 	public void createNewUser(Usuario user) throws UsuarioException {
 			cineMapDB.createNewUser(user);
+	}
+
+	@Override
+	public Object getUser() throws UsuarioException {
+		return cineMapDB.getUser();
+	}
+
+	@Override
+	public Object getUserByCorreo(String correo) throws UsuarioException {
+		return cineMapDB.getUserByCorreo(correo);
 	}
 
 }

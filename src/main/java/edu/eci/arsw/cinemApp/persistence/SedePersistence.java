@@ -11,4 +11,12 @@ public interface SedePersistence {
 
 	public List<Sede> getSedeByID(String idPelicula, String idCinema) throws SedeException;
 
+	public void comprarAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException;
+
+	public List<Sede> getSedeReserva(String pelicula, String cinema, String sede)throws SedeException;
+
+	public Object getReservasByUser(String user);
+
+	public void deleteAsiento(String pelicula, String cinema, String sede, String username, String asientos) throws SedeException;
+
 }

@@ -11,4 +11,8 @@ public interface UsuarioPersistence {
 
 	public Usuario getUsers(String email) throws UsuarioException;
 
+	public Object getUser() throws UsuarioException;
+
+	public Object getUserByCorreo(String correo) throws UsuarioException;
+
 }
